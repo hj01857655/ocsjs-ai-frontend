@@ -1,0 +1,206 @@
+// 全局过渡动画
+
+// 淡入淡出
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.28s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// 面包屑过渡
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all 0.5s;
+}
+
+.breadcrumb-enter-from,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+// 标签页过渡
+.tags-view-enter-active,
+.tags-view-leave-active {
+  transition: all 0.3s;
+}
+
+.tags-view-enter-from,
+.tags-view-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+// 侧边栏Logo过渡
+.sidebarLogoFade-enter-active {
+  transition: opacity 1.5s;
+}
+
+.sidebarLogoFade-enter-from,
+.sidebarLogoFade-leave-to {
+  opacity: 0;
+}
+
+// 路由过渡
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-transform-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+// 滑动过渡
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+// 弹性过渡
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// 缩放过渡
+.zoom-enter-active,
+.zoom-leave-active {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.zoom-enter-from,
+.zoom-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+// 旋转过渡
+.rotate-enter-active,
+.rotate-leave-active {
+  transition: all 0.3s;
+}
+
+.rotate-enter-from,
+.rotate-leave-to {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+// 列表过渡
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-move {
+  transition: transform 0.5s;
+}
+
+// 模态框过渡
+.modal-enter-active {
+  transition: all 0.3s ease;
+}
+
+.modal-leave-active {
+  transition: all 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+// 抽屉过渡
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.drawer-enter-from {
+  transform: translateX(100%);
+}
+
+.drawer-leave-to {
+  transform: translateX(100%);
+}
+
+// 下拉过渡
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+// 卡片翻转过渡
+.flip-enter-active,
+.flip-leave-active {
+  transition: transform 0.6s;
+}
+
+.flip-enter-from,
+.flip-leave-to {
+  transform: rotateY(180deg);
+}
+
+// 加载过渡
+.loading-enter-active,
+.loading-leave-active {
+  transition: opacity 0.3s;
+}
+
+.loading-enter-from,
+.loading-leave-to {
+  opacity: 0;
+}

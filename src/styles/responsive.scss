@@ -1,0 +1,437 @@
+// 响应式设计样式
+@use "sass:map";
+
+// 断点定义
+$breakpoints: (
+  xs: 480px,
+  // 超小屏幕（手机）
+  sm: 768px,
+  // 小屏幕（平板）
+  md: 992px,
+  // 中等屏幕（小桌面）
+  lg: 1200px,
+  // 大屏幕（桌面）
+  xl: 1920px // 超大屏幕
+);
+
+// 媒体查询混合器
+@mixin respond-to($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unknown breakpoint: #{$breakpoint}.";
+  }
+}
+
+@mixin respond-above($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint) + 1px) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unknown breakpoint: #{$breakpoint}.";
+  }
+}
+
+// 容器响应式
+.container-responsive {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @include respond-to(lg) {
+    max-width: 960px;
+    padding: 0 15px;
+  }
+
+  @include respond-to(md) {
+    max-width: 720px;
+    padding: 0 15px;
+  }
+
+  @include respond-to(sm) {
+    max-width: 540px;
+    padding: 0 10px;
+  }
+
+  @include respond-to(xs) {
+    padding: 0 10px;
+  }
+}
+
+// 网格系统
+.row-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+
+  @include respond-to(sm) {
+    margin: 0 -5px;
+  }
+}
+
+.col-responsive {
+  padding: 0 10px;
+  flex: 1;
+
+  @include respond-to(sm) {
+    padding: 0 5px;
+  }
+
+  // 列宽度类
+  &.col-1 {
+    flex: 0 0 8.333333%;
+  }
+
+  &.col-2 {
+    flex: 0 0 16.666667%;
+  }
+
+  &.col-3 {
+    flex: 0 0 25%;
+  }
+
+  &.col-4 {
+    flex: 0 0 33.333333%;
+  }
+
+  &.col-6 {
+    flex: 0 0 50%;
+  }
+
+  &.col-8 {
+    flex: 0 0 66.666667%;
+  }
+
+  &.col-9 {
+    flex: 0 0 75%;
+  }
+
+  &.col-12 {
+    flex: 0 0 100%;
+  }
+
+  // 小屏幕下全宽
+  @include respond-to(sm) {
+    &.col-sm-12 {
+      flex: 0 0 100%;
+    }
+
+    &.col-sm-6 {
+      flex: 0 0 50%;
+    }
+  }
+
+  @include respond-to(xs) {
+    &:not(.col-xs-keep) {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+// 卡片响应式
+.card-responsive {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+
+  @include respond-to(md) {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  @include respond-to(sm) {
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+  }
+
+  @include respond-to(xs) {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+}
+
+// 表格响应式
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  table {
+    width: 100%;
+    min-width: 600px;
+
+    @include respond-to(sm) {
+      min-width: 500px;
+      font-size: 14px;
+    }
+
+    @include respond-to(xs) {
+      min-width: 400px;
+      font-size: 12px;
+    }
+  }
+
+  // 移动端表格堆叠
+  @include respond-to(xs) {
+    &.table-stack {
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      tr {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+
+      td {
+        border: none;
+        position: relative;
+        padding-left: 50% !important;
+        text-align: left !important;
+
+        &:before {
+          content: attr(data-label) ": ";
+          position: absolute;
+          left: 6px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+// 表单响应式
+.form-responsive {
+  .el-form-item {
+    margin-bottom: 20px;
+
+    @include respond-to(sm) {
+      margin-bottom: 15px;
+    }
+
+    @include respond-to(xs) {
+      margin-bottom: 12px;
+    }
+  }
+
+  .el-form-item__label {
+    @include respond-to(sm) {
+      font-size: 14px;
+    }
+
+    @include respond-to(xs) {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+  }
+
+  .el-input,
+  .el-select,
+  .el-textarea {
+    @include respond-to(xs) {
+
+      .el-input__inner,
+      .el-textarea__inner {
+        font-size: 16px; // 防止iOS缩放
+      }
+    }
+  }
+
+  // 表单按钮组
+  .form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @include respond-to(xs) {
+      .el-button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// 导航响应式
+.nav-responsive {
+  .el-menu {
+    @include respond-to(md) {
+      &.el-menu--horizontal {
+
+        .el-menu-item,
+        .el-submenu__title {
+          padding: 0 10px;
+          font-size: 14px;
+        }
+      }
+    }
+
+    @include respond-to(sm) {
+      &.el-menu--horizontal {
+        display: none; // 小屏幕隐藏水平菜单
+      }
+    }
+  }
+
+  // 移动端菜单
+  .mobile-menu {
+    display: none;
+
+    @include respond-to(sm) {
+      display: block;
+    }
+  }
+}
+
+// 搜索框响应式
+.search-responsive {
+  .search-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+    }
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+
+    @include respond-to(sm) {
+      min-width: auto;
+    }
+  }
+
+  .search-buttons {
+    display: flex;
+    gap: 8px;
+
+    @include respond-to(xs) {
+      .el-button {
+        flex: 1;
+      }
+    }
+  }
+}
+
+// 统计卡片响应式
+.stats-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  @include respond-to(sm) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  @include respond-to(xs) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+// 工具类
+.hidden-xs {
+  @include respond-to(xs) {
+    display: none !important;
+  }
+}
+
+.hidden-sm {
+  @include respond-to(sm) {
+    display: none !important;
+  }
+}
+
+.hidden-md {
+  @include respond-to(md) {
+    display: none !important;
+  }
+}
+
+.visible-xs {
+  display: none !important;
+
+  @include respond-to(xs) {
+    display: block !important;
+  }
+}
+
+.visible-sm {
+  display: none !important;
+
+  @include respond-to(sm) {
+    display: block !important;
+  }
+}
+
+// 文本响应式
+.text-responsive {
+  @include respond-to(sm) {
+    font-size: 14px;
+  }
+
+  @include respond-to(xs) {
+    font-size: 13px;
+  }
+}
+
+// 间距响应式
+.spacing-responsive {
+  padding: 20px;
+
+  @include respond-to(md) {
+    padding: 15px;
+  }
+
+  @include respond-to(sm) {
+    padding: 12px;
+  }
+
+  @include respond-to(xs) {
+    padding: 10px;
+  }
+}
