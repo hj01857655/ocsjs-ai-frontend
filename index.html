@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EduBrain AI - 智能题库系统，基于AI的智能搜题解决方案" />
+  <meta name="keywords" content="AI搜题,智能题库,在线答题,教育科技" />
+  <meta name="author" content="EduBrain AI Team" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edubrain-ai.com/" />
+  <meta property="og:title" content="EduBrain AI - 智能题库系统" />
+  <meta property="og:description" content="基于AI的智能搜题解决方案，提供高效准确的题目搜索和答案生成服务" />
+  <meta property="og:image" content="/logo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://edubrain-ai.com/" />
+  <meta property="twitter:title" content="EduBrain AI - 智能题库系统" />
+  <meta property="twitter:description" content="基于AI的智能搜题解决方案，提供高效准确的题目搜索和答案生成服务" />
+  <meta property="twitter:image" content="/logo.png" />
+
+  <!-- PWA相关 -->
+  <meta name="theme-color" content="#409eff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="EduBrain AI" />
+  <link rel="apple-touch-icon" href="/logo-192.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- 预加载关键资源 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <title>EduBrain AI - 智能题库系统</title>
+
+  <!-- 加载动画样式 -->
+  <style>
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-content {
+      text-align: center;
+      color: white;
+    }
+
+    .loading-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      animation: pulse 2s infinite;
+    }
+
+    .loading-text {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .loading-subtitle {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto 0;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 加载动画 -->
+  <div id="loading">
+    <div class="loading-content">
+      <div class="loading-logo">🧠</div>
+      <div class="loading-text">EduBrain AI</div>
+      <div class="loading-subtitle">智能题库系统正在启动...</div>
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+
+  <!-- 应用根节点 -->
+  <div id="app"></div>
+
+  <!-- 主脚本 -->
+  <script type="module" src="/src/main.js"></script>
+
+  <!-- 加载完成后隐藏加载动画 -->
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        const loading = document.getElementById('loading');
+        if (loading) {
+          loading.classList.add('fade-out');
+          setTimeout(function () {
+            loading.style.display = 'none';
+          }, 500);
+        }
+      }, 1000);
+    });
+
+
+  </script>
+</body>
+
+</html>
